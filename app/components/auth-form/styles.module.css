@@ -4,6 +4,8 @@
   align-items: center;
   width: fit-content;
   padding: 20px;
+  height: 360px;
+  justify-content: space-evenly;
 }
 
 .header {
