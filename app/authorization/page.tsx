@@ -1,6 +1,12 @@
+'use client';
+
+import Button from '../components/button';
+
 const AuthorizationPage = () => {
   return (
-    <h1>Authorize</h1>
+    <Button label='Sign Up' onClick={() => {
+      console.log('BTN CLICK')
+    }} />
   )
 }
 
