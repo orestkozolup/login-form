@@ -1,13 +1,12 @@
-'use client';
-
-import Button from '../components/button';
+import AuthForm from "../components/auth-form";
+import styles from './styles.module.css';
 
 const AuthorizationPage = () => {
   return (
-    <Button label='Sign Up' onClick={() => {
-      console.log('BTN CLICK')
-    }} />
-  )
-}
+    <main className={styles.container}>
+      <AuthForm />
+    </main>
+  );
+};
 
 export default AuthorizationPage;
