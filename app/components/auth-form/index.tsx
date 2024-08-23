@@ -1,10 +1,11 @@
 "use client";
 
-import { Formik, Form, Field } from "formik";
+import { Formik, Form } from "formik";
 import { validateEmail, validatePassword } from "./utils";
 
 import Button from "../button";
-import styles from './styles.module.css';
+import Input from "../input";
+import styles from "./styles.module.css";
 
 const AuthForm = () => {
   const initialValues = {
@@ -27,10 +28,9 @@ const AuthForm = () => {
         <Form className={styles.container}>
           <h2 className={styles.header}>Sign Up</h2>
 
-          <Field
+          <Input
             name="email"
             placeholder="Enter your email"
-            className="input"
             onBlur={(e: any) => {
               const { value } = e.target;
               handleBlur(e);
@@ -39,11 +39,10 @@ const AuthForm = () => {
             }}
           />
 
-          <Field
+          <Input
             name="password"
             type="password"
             placeholder="Create your password"
-            className="input"
             onChange={(e: any) => {
               const { value } = e.target;
               handleChange(e);

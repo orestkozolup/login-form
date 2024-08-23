@@ -1,7 +1,9 @@
 import styles from "./styles.module.css";
 
-const Input = ({ placeholder }: any) => {
-  return <input className={styles.input} placeholder={placeholder} />;
+import { Field } from "formik";
+
+const Input = (props: any) => {
+  return <Field className={styles.input} {...props} />;
 };
 
 export default Input;
