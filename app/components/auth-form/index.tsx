@@ -1,80 +1,97 @@
 "use client";
 
-import styles from "./styles.module.css";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as Yup from "yup";
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 
-import Input from "../input";
-import Button from "../button";
+const validateEmail = (value: any) => {
+  let error;
+  if (!value) {
+    error = 'Email is required';
+  } else if (!/\S+@\S+\.\S+/.test(value)) {
+    error = 'Invalid email address';
+  }
+  return error;
+};
+
+const validatePassword = (value: any) => {
+  const errors = [];
+  if (!value) {
+    errors.push('Password is required');
+  }
+  if (value.length < 8) {
+    errors.push('Password must be at least 8 characters');
+  }
+  if (value.length > 64) {
+    errors.push('Password must be 64 characters or less');
+  }
+  if (!/[A-Z]/.test(value)) {
+    errors.push('Password must contain at least one uppercase letter');
+  }
+  if (!/\d/.test(value)) {
+    errors.push('Password must contain at least one number');
+  }
+  return errors.length > 0 ? errors.join(', ') : undefined;
+};
 
 const AuthForm = () => {
-  const validationSchema = Yup.object().shape({
-    email: Yup.string()
-      .email('Invalid email address')
-      .required('Email is required'),
-    password: Yup.string()
-      .min(8, 'Password must be at least 8 characters')
-      .max(64, 'Password must be 64 characters or less')
-      .matches(/[A-Z]/, 'Password must contain at least one uppercase letter')
-      .matches(/\d/, 'Password must contain at least one number')
-      .required('Password is required'),
-  });
+  const initialValues = {
+    email: '',
+    password: '',
+  };
+
+  const handleSubmit = (values: any) => {
+    console.log('Form Data:', values);
+  };
 
   return (
-    <div className={styles.container}>
-      {/* <h2 className={styles.header}>Sign Up</h2>
-      <Input placeholder="Enter your email" />
-      <Input placeholder="Create your password" />
-      <Button label="Sign Up" onClick={() => console.log("HERE1")} /> */}
+    <Formik
+      initialValues={initialValues}
+      onSubmit={handleSubmit}
+      validateOnBlur={true}
+      validateOnChange={false}
+    >
+      {({ handleChange, handleBlur, setFieldValue, errors, touched }) => (
+        <Form className="container">
+          <h2 className="header">Sign Up</h2>
 
-      <Formik
-        initialValues={{ email: "", password: "" }}
-        validationSchema={validationSchema}
-        onSubmit={(values) => {
-          console.log("Form data", values);
-        }}
-      >
-        {({ handleSubmit, errors }) => {
-          console.log('HERE2', errors)
+          {/* Email Field */}
+          <div>
+            <Field
+              name="email"
+              placeholder="Enter your email"
+              className="input"
+              onBlur={(e: any) => {
+                const { value } = e.target;
+                handleBlur(e);
+                const error = validateEmail(value);
+                console.log('HERE1', error);
+                setFieldValue('email', value, !error);
+              }}
+            />
+            {touched.email && errors.email && <div className="error">{errors.email}</div>}
+          </div>
 
-          return (
-            <Form onSubmit={handleSubmit} className={styles.container}>
-              <h2 className={styles.header}>Sign Up</h2>
-  
-              <div>
-                <Field
-                  name="email"
-                  type="email"
-                  placeholder="Enter your email"
-                  // className={styles.input}
-                />
-                <ErrorMessage
-                  name="email"
-                  component="div"
-                  // className={styles.error}
-                />
-              </div>
-  
-              <div>
-                <Field
-                  name="password"
-                  type="password"
-                  placeholder="Create your password"
-                  className={styles.input}
-                />
-                <ErrorMessage
-                  name="password"
-                  component="div"
-                  className={styles.error}
-                />
-              </div>
-  
-              <Button label="Sign Up" type="submit" />
-            </Form>
-          )
-        }}
-      </Formik>
-    </div>
+          {/* Password Field */}
+          <div>
+            <Field
+              name="password"
+              type="password"
+              placeholder="Create your password"
+              className="input"
+              onChange={(e: any) => {
+                const { value } = e.target;
+                handleChange(e);
+                const error = validatePassword(value);
+                console.log('HERE2', error);
+                setFieldValue('password', value, !error);
+              }}
+            />
+            {touched.password && errors.password && <div className="error">{errors.password}</div>}
+          </div>
+
+          <button type="submit">Sign Up</button>
+        </Form>
+      )}
+    </Formik>
   );
 };
 
