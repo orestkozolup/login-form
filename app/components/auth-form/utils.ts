@@ -10,20 +10,38 @@ export const validateEmail = (value: string) => {
 
 export const validatePassword = (value: string) => {
   const errors = [];
-  if (!value) {
-    errors.push("Password is required");
+  if (value.length < 8 || value.length > 64) {
+    errors.push(PASSWORD_RULES.LENGTH);
   }
-  if (value.length < 8) {
-    errors.push("Password must be at least 8 characters");
-  }
-  if (value.length > 64) {
-    errors.push("Password must be 64 characters or less");
-  }
-  if (!/[A-Z]/.test(value)) {
-    errors.push("Password must contain at least one uppercase letter");
+  if (!/[A-Z]/.test(value) || !/[a-z]/.test(value)) {
+    errors.push(PASSWORD_RULES.CASES);
   }
   if (!/\d/.test(value)) {
-    errors.push("Password must contain at least one number");
+    errors.push(PASSWORD_RULES.DIGIT);
   }
   return errors;
+};
+
+export const PASSWORD_RULES = {
+  DIGIT: "At least one digit",
+  LENGTH: "8 to 64 characters or more (no spaces)",
+  CASES: "Uppercase and lowercase letters",
+};
+
+export const AUTH_FORM_CONFIG = {
+  EMAIL: {
+    name: "email",
+    type: "text",
+    placeholder: "Enter your email",
+    validator: validateEmail,
+    validationType: 'lazy'
+  },
+  PASSWORD: {
+    name: "password",
+    type: "password",
+    placeholder: "Create your password",
+    validator: validatePassword,
+    validationType: 'live',
+    rules: PASSWORD_RULES,
+  },
 };
