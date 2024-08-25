@@ -9,6 +9,10 @@
   cursor: pointer;
 }
 
+.disabled {
+  background: linear-gradient(150deg, #d3d3d3, #a9a9a9);
+}
+
 .button:hover {
   background: linear-gradient(150deg, #5ba5e0, #3d57db);
 }

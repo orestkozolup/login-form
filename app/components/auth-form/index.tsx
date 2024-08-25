@@ -22,10 +22,10 @@ const AuthForm = () => {
       initialValues={initialValues}
       onSubmit={handleSubmit}
       validateOnBlur={true}
-      validateOnChange={false}
+      validateOnChange={true}
     >
-      {() => (
-        <Form className={styles.container}>
+      {({ errors }) => (
+        <Form className={styles.container} autoComplete="off">
           <h2 className={styles.header}>Sign Up</h2>
 
           <Input
@@ -36,7 +36,7 @@ const AuthForm = () => {
             config={AUTH_FORM_CONFIG.PASSWORD}
           />
 
-          <Button type="submit">Sign Up</Button>
+          <Button type="submit" disabled={!!Object.keys(errors).length}>Sign Up</Button>
         </Form>
       )}
     </Formik>

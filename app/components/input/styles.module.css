@@ -9,8 +9,21 @@
   box-sizing: border-box;
 }
 
+.error, .input.error:focus {
+  border-color: red;
+  color: red;
+}
+
 .input:focus {
   outline: none;
   border: 1px solid #151d51;
   color: #151d51;
+}
+
+.input.success {
+  border-color: green;
+}
+
+.success {
+  color: green;
 }
