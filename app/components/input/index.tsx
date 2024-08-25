@@ -1,14 +1,13 @@
 "use client";
 
 import styles from "./styles.module.css";
-import { useState } from "react";
+import { useState, memo } from "react";
 
 import { Field, useFormikContext } from "formik";
 import { FieldConfig } from "../auth-form/utils";
 
 interface InputProps {
   config: FieldConfig;
-  inputRules?: string[];
   externalClass?: string;
   [key: string]: any;
 }
@@ -17,9 +16,11 @@ interface FormValues {
   [key: string]: any;
 }
 
-const Input = ({ config, inputRules, externalClass, ...props }: InputProps) => {
+const Input = ({ config, externalClass, ...props }: InputProps) => {
   const { handleBlur, handleChange, setFieldValue, setFieldError, values } =
     useFormikContext<FormValues>();
+
+  console.log('HERE1');
 
   const { validator, validationType, rules, name, ...restConfig } = config;
 
@@ -85,4 +86,4 @@ const Input = ({ config, inputRules, externalClass, ...props }: InputProps) => {
   );
 };
 
-export default Input;
+export default memo(Input);

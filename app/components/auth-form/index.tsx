@@ -2,6 +2,7 @@
 
 import { Formik, Form } from "formik";
 import { AUTH_FORM_CONFIG } from "./utils";
+import { useMemo } from 'react';
 
 import Button from "../button";
 import Input from "../input";
@@ -16,7 +17,7 @@ const AuthForm = () => {
   return (
     <Formik
       initialValues={initialValues}
-      onSubmit={handleSubmit}
+      onSubmit={handleSubmit}s
       validateOnBlur={false}
       validateOnChange={false}
     >
