@@ -9,7 +9,8 @@
   box-sizing: border-box;
 }
 
-.error, .input.error:focus {
+.error,
+.input.error:focus {
   border-color: red;
   color: red;
 }
@@ -26,4 +27,13 @@
 
 .success {
   color: green;
+}
+
+.hintContainer {
+  padding: 10px;
+}
+
+.errorContainer {
+  position: absolute;
+  margin: 10px;
 }

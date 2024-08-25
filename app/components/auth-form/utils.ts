@@ -22,26 +22,44 @@ export const validatePassword = (value: string) => {
   return errors;
 };
 
+export const initialValues = {
+  email: "",
+  password: "",
+};
+
+export interface FieldConfig {
+  validator: (value: string) => string[];
+  validationType: string;
+  rules?: string[];
+  name: string;
+  type: string;
+  placeholder: string;
+}
+
+interface FormConfig {
+  [key: string]: FieldConfig;
+}
+
 export const PASSWORD_RULES = {
   DIGIT: "At least one digit",
   LENGTH: "8 to 64 characters or more (no spaces)",
   CASES: "Uppercase and lowercase letters",
 };
 
-export const AUTH_FORM_CONFIG = {
+export const AUTH_FORM_CONFIG: FormConfig = {
   EMAIL: {
     name: "email",
     type: "text",
     placeholder: "Enter your email",
     validator: validateEmail,
-    validationType: 'lazy'
+    validationType: "lazy",
   },
   PASSWORD: {
     name: "password",
     type: "password",
     placeholder: "Create your password",
     validator: validatePassword,
-    validationType: 'live',
-    rules: PASSWORD_RULES,
+    validationType: "live",
+    rules: Object.values(PASSWORD_RULES),
   },
 };

@@ -8,6 +8,11 @@
   justify-content: space-evenly;
 }
 
+.emailInputWrapper {
+  margin-bottom: 40px;
+  position: relative;
+}
+
 .header {
   color: #4a4e71;
 }
