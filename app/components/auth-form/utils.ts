@@ -1,11 +1,11 @@
 export const validateEmail = (value: string) => {
-  let error;
+  const errors = [];
   if (!value) {
-    error = "Email is required";
+    errors.push("Email is required");
   } else if (!/\S+@\S+\.\S+/.test(value)) {
-    error = "Invalid email address";
+    errors.push("Invalid email address");
   }
-  return error;
+  return errors;
 };
 
 export const validatePassword = (value: string) => {

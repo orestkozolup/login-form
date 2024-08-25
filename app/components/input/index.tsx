@@ -1,12 +1,19 @@
+"use client";
+
 import styles from "./styles.module.css";
+import { useState } from "react";
 
 import { Field, useFormikContext } from "formik";
 
 const Input = ({ config, inputRules, ...props }: any) => {
-  const { handleBlur, handleChange, setFieldValue, ...formik } =
+  const { handleBlur, handleChange, setFieldValue, setFieldError, ...formik } =
     useFormikContext();
 
   const { validator, validationType, rules, ...restConfig } = config;
+
+  const [errors, setErrors] = useState([]);
+
+  console.log("HERE3", formik);
 
   const onChange =
     validationType === "live"
@@ -14,6 +21,9 @@ const Input = ({ config, inputRules, ...props }: any) => {
           const { value } = e.target;
           handleChange(e);
           const error = validator(value);
+          if (error[0]) {
+            setErrors(error[0]);
+          }
           setFieldValue("password", value, !error);
         }
       : handleChange;
@@ -25,6 +35,9 @@ const Input = ({ config, inputRules, ...props }: any) => {
           const { value } = e.target;
           handleBlur(e);
           const error = validator(value);
+          if (error[0]) {
+            setErrors(error[0]);
+          }
           setFieldValue("email", value, !error);
         };
 
