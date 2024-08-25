@@ -20,8 +20,6 @@ const Input = ({ config, externalClass, ...props }: InputProps) => {
   const { handleBlur, handleChange, setFieldValue, setFieldError, values } =
     useFormikContext<FormValues>();
 
-  console.log('HERE1');
-
   const { validator, validationType, rules, name, ...restConfig } = config;
 
   const [errors, setErrors] = useState<string[]>([]);
@@ -46,7 +44,8 @@ const Input = ({ config, externalClass, ...props }: InputProps) => {
     const { value } = e.target;
     handleBlur(e);
     if (validationType !== "live") {
-      handleValidation(value);
+      const isValid = handleValidation(value);
+      setFieldValue(name, value, isValid);
     }
   };
 
