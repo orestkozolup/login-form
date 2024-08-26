@@ -9,6 +9,10 @@
   box-sizing: border-box;
 }
 
+.inputWrapper {
+  position: relative;
+}
+
 .error,
 .input.error:focus {
   border-color: red;
@@ -36,4 +40,11 @@
 .errorContainer {
   position: absolute;
   margin: 10px;
+}
+
+.image {
+  position: absolute;
+  top: 12px;
+  right: 10px;
+  cursor: pointer;
 }

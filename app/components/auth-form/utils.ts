@@ -32,8 +32,9 @@ export interface FieldConfig {
   validationType: string;
   rules?: string[];
   name: string;
-  type: string;
+  type: 'text' | 'password';
   placeholder: string;
+  hidden?: true;
 }
 
 interface FormConfig {
@@ -61,5 +62,6 @@ export const AUTH_FORM_CONFIG: FormConfig = {
     validator: validatePassword,
     validationType: "live",
     rules: Object.values(PASSWORD_RULES),
+    hidden: true
   },
 };
